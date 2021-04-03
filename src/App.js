@@ -38,7 +38,7 @@ function Video(props) {
     )
 };
 
-function ImpovedBlock(Component) {
+function withBlock(Component) {
     return function (props)
     {
       if (props.views < 100) {
@@ -61,19 +61,18 @@ function ImpovedBlock(Component) {
     }
   
 }
-
+const VideoBlock = withBlock(Video);
+const ArcticleBlock = withBlock(Article);
 
 function List(props) {
     return props.list.map(item => {
         switch (item.type) {
             case 'video':
-                const VideoBlock = ImpovedBlock(Video);
                 return (
                     <VideoBlock {...item} />
                 );
 
-            case 'article':
-                const ArcticleBlock = ImpovedBlock(Article);
+            case 'article':              
                 return (
                     <ArcticleBlock {...item} />
                 );
